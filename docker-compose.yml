@@ -1,0 +1,17 @@
+---
+version: "3.7"
+services:
+  vpn:
+    image: "mobtitude/vpn-pptp"
+    environment:
+    - "DEBUG=${DEBUG-1}"
+    privileged: true
+    build: {context: "."}
+    volumes: ["./:/host"]
+    entrypoint: /host/entrypoint.sh
+    devices:
+    - /dev/ppp
+    cap_add:
+    - ALL
+    env_file: [.env]
+    network_mode: "${NETWORK_MODE:-host}"

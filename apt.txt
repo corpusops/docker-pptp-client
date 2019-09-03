@@ -1,0 +1,7 @@
+curl
+openssh-client
+sshfs
+pptp-linux
+iptables
+traceroute
+kmod

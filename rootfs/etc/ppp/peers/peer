@@ -1,0 +1,37 @@
+ipparam peer
+pty "pptp {{.Env.ADDRESS}} --nolaunchpppd"
+# pty "pptp {{.Env.ADDRESS}}"
+{{ $u := ( .Env.USERNAME | contains "/" ) | ternary .Env.USERNAME  (list .Env.ADDRESS "\\\\" .Env.USERNAME|join "") }}
+name {{$u}}
+# name {{.Env.USERNAME}}
+remotename PPTP
+
+refuse-pap
+refuse-chap
+refuse-mschap
+require-mppe-128
+require-mschap-v2
+
+# Network and Routing
+ms-dns 8.8.8.8
+ms-dns 8.8.4.4
+proxyarp
+nodefaultroute
+
+# Miscellaneous
+lock
+nobsdcomp
+novj
+novjccomp
+nologfd
+nodetach
+
+
+# Logging
+# debug
+debug debug debug
+dump
+logfd 2
+
+show-password
+silent
